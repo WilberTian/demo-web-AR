@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>12.Asset-Management-System</title>
+    <script src="../../libs/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="skyTexture" src="../../asserts/sky.jpg">
+        <img id="boxTexture" src="../../asserts/texture-1.jpg">
+      </a-assets>
+
+      <a-sky src="#skyTexture" radius="30"></a-sky>
+
+      <a-box src="#boxTexture" position="-2 0.5 -4"></a-box>
+    </a-scene>
+  </body>
+</html>
