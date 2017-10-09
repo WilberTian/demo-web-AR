@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>multiple-component</title>
+    <script src="../../libs/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('log', {
+        schema: {
+          event: {type: 'string', default: ''},
+          message: {type: 'string', default: 'Hello, World!'}
+        },
+
+        multiple: true,
+
+        init: function () {
+          var self = this;
+          this.eventHandlerFn = function () { console.log(self.data.message); };
+        },
+
+        update: function (oldData) {
+          var data = this.data;
+          var el = this.el;
+          // `event` updated. Remove the previous event listener if it exists.
+          if (oldData.event && data.event !== oldData.event) {
+            el.removeEventListener(oldData.event, this.eventHandlerFn);
+          }
+          if (data.event) {
+            el.addEventListener(data.event, this.eventHandlerFn);
+          } else {
+            console.log(data.message);
+          }
+        },
+
+        remove: function () {
+          var data = this.data;
+          var el = this.el;
+          // Remove event listener.
+          if (data.event) {
+            el.removeEventListener(data.event, this.eventHandlerFn);
+          }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <!--
+      The syntax for an attribute name for a multiple-instanced component has the form of <COMPONENTNAME>__<ID>, 
+      a double-underscore with an ID suffix. The ID can be whatever we choose. 
+      -->
+      <a-entity log__helloworld="message: Hello, World!"
+        log__wilber="message: Hello, Wilber!"></a-entity>
+    </a-scene>
+  </body>
+</html>

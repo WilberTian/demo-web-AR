@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Entity-Component-System</title>
+    <script src="../../libs/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="#ECECEC"></a-sky>
+
+      <!-- 
+      <a-entity ${componentName}="${propertyName1}: ${propertyValue1}; ${propertyName2:}: ${propertyValue2}">
+
+      For example, we have <a-entity> and attach the geometry, material, light, 
+      and position components with various properties and property values
+      -->
+      <a-entity geometry="primitive: sphere; radius: 1.5"
+          light="type: point; color: white; intensity: 2"
+          material="color: white; shader: flat; src: ../../asserts/texture-1.jpg"
+          position="0 0 -5"></a-entity>
+    </a-scene>
+  </body>
+</html>
