@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>interaction</title>
+    <script src="../../libs/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+	  <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script>
+        AFRAME.registerComponent('hide-on-click', {
+            dependencies: ['raycaster'],
+            schema: {
+                target:{type: 'selector'}
+            },
+            init: function () {
+                var data = this.data;
+                var el = this.el;
+                el.addEventListener('click', function () {
+                    el.setAttribute('visible', false);
+                    data.target.setAttribute('visible', true);
+                });
+            }
+        });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky src="../../asserts/beach.jpg"></a-sky>
+      <a-sphere hide-on-click="target:#another_cube" src="../../asserts/texture-2.jpg" radius="0.5" position="0 1.5 -3"></a-sphere>
+      <a-box id="another_cube" visible="false" position="-1 1.5 -4" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9"></a-box>
+
+
+      <!-- Camera & cursor -->
+	  <a-entity camera look-controls>
+	    <a-cursor id="cursor" 
+	        animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+	        animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+	        event-set__1="_event: mouseenter; color: #0092d8" 
+	        event-set__2="_event: mouseleave; color: black"></a-cursor>
+  	  </a-entity>
+    </a-scene>
+  </body>
+</html>
